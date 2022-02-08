@@ -1,34 +1,26 @@
-﻿using System;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace PostRequest
+namespace TimeSheets
 {
-    class Program
+    public class Program
     {
-
-        static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            await Task.Run(()=>myGetRequest());
+            CreateHostBuilder(args).Build().Run();
         }
 
-        static async Task<int> myGetRequest()
-        {
-            Console.WriteLine("Start my prog");
-
-            var mCont = new myController();
-
-            var dataRes = new RequestDTO();
-            for (int i= mCont.startPost; i<= mCont.endPost; i++)
-            {
-                dataRes = await mCont.GetId(i);
-                if (dataRes != null)
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    mCont.writeResponse(dataRes);
-                }
-            }
-            Console.WriteLine("End my prog");
-
-            return 1;
-        }
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
