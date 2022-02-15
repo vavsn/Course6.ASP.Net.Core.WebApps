@@ -1,6 +1,6 @@
 using System;
 
-namespace TimeSheets
+namespace TimeSheets.DAL
 {
     public class WeatherForecast
     {
