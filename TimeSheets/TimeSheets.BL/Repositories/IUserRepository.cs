@@ -1,12 +1,13 @@
-﻿using TmSheets.DAL.Models;
+﻿using TimeSheets.DAL.Models;
 
 namespace TimeSheets.BL.Repositories
 {
-    public interface IPersonRepository : IRepository<Person>
+
+    public interface IUserRepository : IUsRepository<User>
     {
 
     }
-    public interface IRepository<T> where T : class
+    public interface IUsRepository<T> where T : class
     {
         Task Add(T entity);
 
@@ -16,4 +17,5 @@ namespace TimeSheets.BL.Repositories
 
         Task Delete(T id);
     }
+
 }

@@ -5,39 +5,39 @@ using TimeSheets.DAL.Models;
 namespace TimeSheets.Controllers
 {
     [ApiController]
-    [Route("person/[controller]")]
-    public class PersonControllers : ControllerBase
+    [Route("employee/[controller]")]
+    public class EmployeeControllers : ControllerBase
     {
-        public readonly PersonRepository _repository;
+        public readonly EmployeeRepository _repository;
 
-        public PersonControllers(PersonRepository repository)
+        public EmployeeControllers(EmployeeRepository repository)
         {
             _repository = repository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<Person>> GetAll()
+        public async Task<ActionResult<Employee>> GetAll()
         {
             var res = await _repository.Get();
             return Ok(res);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Person>> Create([FromBody] Person newPerson)
+        public async Task<ActionResult<Employee>> Create([FromBody] Employee newEmp)
         {
-            await _repository.Add(newPerson);
+            await _repository.Add(newEmp);
             return NoContent();
         }
 
         [HttpPut]
-        public async Task<ActionResult<Person>> Update([FromBody] Person newPerson)
+        public async Task<ActionResult<Employee>> Update([FromBody] Employee newEmp)
         {
-            await _repository.Update(newPerson);
+            await _repository.Update(newEmp);
             return NoContent();
         }
 
         [HttpDelete]
-        public async Task<ActionResult<Person>> Delete(int Id)
+        public async Task<ActionResult<Employee>> Delete(int Id)
         {
             await _repository.Delete(Id);
             return NoContent();

@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TmSheets.DAL.Models;
-using TmSheets.DAL;
+using TimeSheets.DAL;
+using TimeSheets.DAL.Models;
 
 namespace TimeSheets.BL.Repositories
 {
-    public class PersonRepository
+    public class PersonRepository : IPersonRepository
     {
         private readonly MyDbContext _context;
 
@@ -38,11 +38,19 @@ namespace TimeSheets.BL.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(int personId)
         {
-            var person = await _context.Persons.FirstOrDefaultAsync(en => en.Id == id);
+            var person = await _context.Persons.FirstOrDefaultAsync(en => en.Id == personId);
             person.IsDelete = true;
             await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(Person _person)
+        {
+            var person = await _context.Persons.FirstOrDefaultAsync(en => en.Id == _person.Id);
+            person.IsDelete = true;
+            await _context.SaveChangesAsync();
+            //throw new NotImplementedException();
         }
     }
 }

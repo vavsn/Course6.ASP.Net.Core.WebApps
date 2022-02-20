@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace TmSheets.DAL.Migrations
+namespace TimeSheets.DAL.Migrations
 {
-    public partial class fM : Migration
+    public partial class firstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

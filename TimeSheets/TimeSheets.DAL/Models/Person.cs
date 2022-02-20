@@ -1,4 +1,4 @@
-﻿namespace TmSheets.DAL.Models
+﻿namespace TimeSheets.DAL.Models
 {
     public class Person
     {
