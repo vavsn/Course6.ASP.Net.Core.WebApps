@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using TimeSheet.API.Models;
 using TimeSheets.BL.Services;
+using TimeSheets.DAL.Interfaces;
 
 namespace TimeSheet.API.Controllers
 {
@@ -27,7 +26,15 @@ namespace TimeSheet.API.Controllers
         }
 
         [HttpGet("/persons/search?searchTerm={term}")]
-        public IActionResult GetByName([FromRoute] string term) // FromRoute
+        public IActionResult GetByName([FromQuery] string term) // FromQuery
+        {
+            Person pers = repository.GetByName(term);
+
+            return Ok();
+        }
+
+        [HttpGet("/persons/?skip={5}&take={10}")]
+        public async Task<ActionResult<IReadOnlyCollection>> GetList([FromQuery] int skip, [FromQuery] int take)
         {
             Person pers = repository.GetByName(term);
 
@@ -35,7 +42,7 @@ namespace TimeSheet.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create([FromRoute] Person pers) // FromRoute
+        public IActionResult Create([FromBody] Person pers) // FromBody
         {
             repository.Create(pers);
 

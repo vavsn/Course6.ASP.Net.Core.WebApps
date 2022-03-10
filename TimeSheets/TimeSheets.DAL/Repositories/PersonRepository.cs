@@ -19,32 +19,51 @@ namespace TimeSheets.DAL.Repositories
         }
         public void Create(Person item)
         {
+            var person = _person[item.Id];
+            if (person is not null)
+            {
+                throw new Exception("Данные уже есть");
+            }
             this._person.Add(item);
         }
 
         public void Delete(int id)
         {
             Person person = _person[id];
-            if (person!= null)
-                _person.Remove(person);
+            if (person is null)
+            {
+                throw new Exception("Указан отсутствующий ID");
+            }
+            _person.Remove(person);
         }
         public Person GetById(int id)
         {
+            Person person = _person[id];
+            if (person is null)
+            {
+                throw new Exception("Указан отсутствующий ID");
+            }
             return _person[id];
         }
 
         public Person GetByName(string name)
         {
-            return Search(name);
+            Person person = Search(name);
+            if (person is null)
+            {
+                throw new Exception("Данные не найдены");
+            }
+            return person;
         }
 
         public void Update(Person item)
         {
-            var srchPerson = Search(item.FirstName);
-            if (srchPerson is not null)
+            var person = Search(item.FirstName);
+            if (person is null)
             {
-                srchPerson = item;
+                throw new Exception("Данные не найдены");
             }
+            person = item;
         }
     }
 }

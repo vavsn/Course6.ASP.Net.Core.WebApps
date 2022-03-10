@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\TimeSheets.BL\TimeSheets.BL.csproj" />
+    <ProjectReference Include="..\TimeSheets.BL\TimeSheets.BL.csproj" />
+    <ProjectReference Include="..\TimeSheets.DAL\TimeSheets.DAL.csproj" />
   </ItemGroup>
 
 </Project>
